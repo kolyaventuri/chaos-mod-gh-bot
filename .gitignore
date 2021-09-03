@@ -25,3 +25,6 @@ npm-debug.log*
 
 # Webpack + serverless
 _warmup
+
+# IAM Policies
+*policy.json

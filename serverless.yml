@@ -1,14 +1,15 @@
-service: serverless-template
+service: chaos-mod-gh-bot
+useDotenv: true
 
 package:
   individually: true
 
 provider:
   name: aws
-  runtime: nodejs12.x
+  runtime: nodejs14.x
   region: us-west-2
-  profile: "<AWS_PROFILE>"
-  role: "arn:aws:iam::<AWS_ID>:role/<ROLE>"
+  profile: "${env:AWS_PROFILE}"
+  role: "arn:aws:iam::${env:AWS_ID}:role/${env:AWS_ROLE}-${self:provider.stage}"
   stage: ${opt:stage, 'dev'}
   logRetentionInDays: ${self:custom.logs.retention.${self:provider.stage}, 7}
   environment:
@@ -41,15 +42,6 @@ custom:
       production: true
       dev: false
       local: false
-  customDomain:
-    domainName: example.com
-    stage: production
-    basePath: ''
-    certificateName: 'example.com'
-    createRoute53Record: true
-    endpointType: 'regional'
-    securityPolicy: tls_1_2
-    enabled: ${self:custom.domain.enabled.${self:provider.stage}}
 
 functions:
   healthcheck:
@@ -65,5 +57,4 @@ plugins:
   - serverless-plugin-warmup
   - serverless-dotenv-plugin
   - serverless-prune-plugin
-  - serverless-domain-manager
-  - serverless-offline
+  - erverless-offline
