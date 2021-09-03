@@ -17,7 +17,16 @@ export const handleHook = async (event: AWSLambda.APIGatewayEvent): Promise<AWSL
   }
 
   if (parseResult.action && parseResult.issue) {
-    await issueHandler(parseResult);
+    try {
+      await issueHandler(parseResult);
+    } catch (error: unknown) {
+      console.error(error);
+
+      return {
+        statusCode: 500,
+        body: '500 server error',
+      };
+    }
   }
 
   return {
