@@ -1,4 +1,5 @@
 import runWarm from '../../utils/run-warm';
+import issueHandler from '../../handlers/v1/issue';
 
 export const handleHook = async (event: AWSLambda.APIGatewayEvent): Promise<AWSLambda.APIGatewayProxyResult> => {
   const {body} = event;
@@ -15,7 +16,9 @@ export const handleHook = async (event: AWSLambda.APIGatewayEvent): Promise<AWSL
     };
   }
 
-  console.log(parseResult);
+  if (parseResult.action && parseResult.issue) {
+    await issueHandler(parseResult);
+  }
 
   return {
     statusCode: 200,
