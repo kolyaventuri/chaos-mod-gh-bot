@@ -1,6 +1,6 @@
 import test from 'ava';
 
-import {healthcheck} from '../../src/healthcheck/get';
+import {healthcheck} from '../../../src/v1/healthcheck/get';
 
 test('returns a 200 ok response', async t => {
   const result = await healthcheck({} as AWSLambda.APIGatewayProxyEvent);

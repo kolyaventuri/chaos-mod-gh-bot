@@ -56,6 +56,7 @@
       "strict": true
     },
     "rules": {
+      "import/extensions": 0,
       "@typescript-eslint/camelcase": 0,
       "@typescript-eslint/naming-convention": [
         "error",
