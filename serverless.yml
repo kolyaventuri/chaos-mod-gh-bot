@@ -57,4 +57,4 @@ plugins:
   - serverless-plugin-warmup
   - serverless-dotenv-plugin
   - serverless-prune-plugin
-  - erverless-offline
+  - serverless-offline
