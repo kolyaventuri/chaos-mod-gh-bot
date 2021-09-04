@@ -161,5 +161,8 @@
     "webpack": "^5.44.0",
     "webpack-node-externals": "^3.0.0",
     "xo": "^0.41.0"
+  },
+  "dependencies": {
+    "@octokit/core": "^3.5.1"
   }
 }
