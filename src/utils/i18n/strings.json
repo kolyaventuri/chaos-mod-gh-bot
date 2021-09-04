@@ -9,5 +9,10 @@
     "OVERUSED_EFFECT": "You may have suggested an effect that gets suggested frequently. Please know that your suggestion may be closed without further warning.",
     "CONTENT_CREATOR": "Your suggestion seems to include the name of a known content creator. Please know that we do not take content creator-specific effect suggestions, and your suggestion may be closed without further warning.",
     "EMPTY_TITLE": "Your issue title is empty! Please update it to have a name or brief description, in addition to the tag."
+  },
+  "issueType": {
+    "EFFECT": "effect suggestion",
+    "FEATURE": "feature request",
+    "BUG": "bug report"
   }
 }
