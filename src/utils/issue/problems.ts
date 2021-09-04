@@ -15,7 +15,7 @@ interface GetIssueProblemsArgs {
   type: IssueType;
 }
 
-const tagRegex = /^\[(.+)\]/i;
+const tagRegex = /^\[(.+)]/i;
 
 export const getIssueProblems = ({title, body, type}: GetIssueProblemsArgs): IssueProblem[] => {
   title = title.toLowerCase();
