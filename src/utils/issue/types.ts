@@ -4,6 +4,7 @@ export const enum IssueProblem {
   BAD_TAG = 'BAD_TAG',
   OVERUSED_EFFECT = 'OVERUSED_EFFECT',
   CONTENT_CREATOR = 'CONTENT_CREATOR',
+  EMPTY_TITLE = 'EMPTY_TITLE',
 }
 
 export const enum IssueStatus {

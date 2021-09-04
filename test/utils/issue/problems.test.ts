@@ -152,3 +152,13 @@ test('if the type is BUG and the title contains a known content creator, does NO
     t.deepEqual(result, [], `Added CONTENT_CREATOR for "${creator}" but the type is BUG`);
   }
 });
+
+test('if the title has a tag, but the rest of the title is empty, adds EMPTY_TITLE', t => {
+  const result = getIssueProblems({
+    title: '[Effect Suggestion]',
+    body: 'some valid body',
+    type: IssueType.EFFECT
+  });
+
+  t.deepEqual(result, [IssueProblem.EMPTY_TITLE]);
+});

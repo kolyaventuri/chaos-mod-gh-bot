@@ -10,14 +10,19 @@ interface GetIssueProblemsArgs {
 const tagRegex = /^\[(.+)]/i;
 
 export const getIssueProblems = ({title, body, type}: GetIssueProblemsArgs): IssueProblem[] => {
-  title = title.toLowerCase().replace(/\s+/g, ' ');
+  title = title.toLowerCase().replace(/\s+/g, ' ').trim();
   body = body.toLowerCase().replace(/\s+/g, ' ');
 
   const statuses: IssueProblem[] = [];
 
   // Check for default titles
-  if (defaultTitles.includes(title.trim())) {
+  if (defaultTitles.includes(title)) {
     statuses.push(IssueProblem.DEFAULT_TITLE);
+  }
+
+  // Check for empty titles
+  if (/^\[.+\]$/.test(title)) {
+    statuses.push(IssueProblem.EMPTY_TITLE);
   }
 
   // Check for overused effects
