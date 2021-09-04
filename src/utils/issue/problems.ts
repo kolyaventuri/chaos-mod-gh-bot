@@ -1,4 +1,4 @@
-import {defaultTitles, overUsedEffects} from '../../constants/issues';
+import {creators, defaultTitles, overUsedEffects} from '../../constants/issues';
 import {IssueProblem, IssueType} from './types';
 
 interface GetIssueProblemsArgs {
@@ -10,8 +10,8 @@ interface GetIssueProblemsArgs {
 const tagRegex = /^\[(.+)]/i;
 
 export const getIssueProblems = ({title, body, type}: GetIssueProblemsArgs): IssueProblem[] => {
-  title = title.toLowerCase();
-  body = body.toLowerCase();
+  title = title.toLowerCase().replace(/\s+/g, ' ');
+  body = body.toLowerCase().replace(/\s+/g, ' ');
 
   const statuses: IssueProblem[] = [];
 
@@ -51,6 +51,16 @@ export const getIssueProblems = ({title, body, type}: GetIssueProblemsArgs): Iss
 
   if (isBadTag) {
     statuses.push(IssueProblem.BAD_TAG);
+  }
+
+  // Check for known content creators
+  if (type === IssueType.EFFECT) {
+    for (const creator of creators) {
+      if (body.includes(creator) || title.includes(creator)) {
+        statuses.push(IssueProblem.CONTENT_CREATOR);
+        break; // Only need to check for the first instance
+      }
+    }
   }
 
   return Array.from(new Set<IssueProblem>(statuses))!;

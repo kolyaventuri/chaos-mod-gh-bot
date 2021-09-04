@@ -8,3 +8,14 @@ export const overUsedEffects = [
   'cougar',
   'cougars',
 ];
+
+export const creators = [
+  'darkviperau',
+  'dark viper au',
+  'dark viperau',
+  'darkviper au',
+  'callemkevin',
+  'callme kevin',
+  'call mekevin',
+  'call me kevin',
+];

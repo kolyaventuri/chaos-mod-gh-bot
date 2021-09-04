@@ -1,5 +1,5 @@
 import test from 'ava';
-import {overUsedEffects} from '../../../src/constants/issues';
+import {overUsedEffects, creators} from '../../../src/constants/issues';
 
 import {getIssueProblems} from '../../../src/utils/issue/problems';
 import {IssueProblem, IssueType} from '../../../src/utils/issue/types';
@@ -79,4 +79,76 @@ test('if the effect has a random or malformed tag, adds BAD_TAG', t => {
   });
 
   t.deepEqual(result, [IssueProblem.BAD_TAG]);
+});
+
+test('if the type is EFFECT and the body contains a known content creator, adds CONTENT_CREATOR', t => {
+  for (const creator of creators) {
+    const result = getIssueProblems({
+      title: '[Effect Suggestion] Test Effect',
+      body: `some effect for ${creator}`,
+      type: IssueType.EFFECT,
+    });
+
+    t.deepEqual(result, [IssueProblem.CONTENT_CREATOR], `Did not add CONTENT_CREATOR for "${creator}"`);
+  }
+});
+
+test('if the type is EFFECT and the title contains a known content creator, adds CONTENT_CREATOR', t => {
+  for (const creator of creators) {
+    const result = getIssueProblems({
+      title: `[Effect Suggestion] Test Effect ${creator}`,
+      body: 'some body',
+      type: IssueType.EFFECT,
+    });
+
+    t.deepEqual(result, [IssueProblem.CONTENT_CREATOR], `Did not add CONTENT_CREATOR for "${creator}"`);
+  }
+});
+
+test('if the type is FEATURE and the body contains a known content creator, does NOT add CONTENT_CREATOR', t => {
+  for (const creator of creators) {
+    const result = getIssueProblems({
+      title: '[Feature Suggestion] Test Effect',
+      body: `some effect for ${creator}`,
+      type: IssueType.FEATURE,
+    });
+
+    t.deepEqual(result, [], `Added CONTENT_CREATOR for "${creator}" but the type is FEATURE`);
+  }
+});
+
+test('if the type is BUG and the body contains a known content creator, does NOT add CONTENT_CREATOR', t => {
+  for (const creator of creators) {
+    const result = getIssueProblems({
+      title: '[Bug] Test Effect',
+      body: `some effect for ${creator}`,
+      type: IssueType.BUG,
+    });
+
+    t.deepEqual(result, [], `Added CONTENT_CREATOR for "${creator}" but the type is BUG`);
+  }
+});
+
+test('if the type is FEATURE and the title contains a known content creator, does NOT add CONTENT_CREATOR', t => {
+  for (const creator of creators) {
+    const result = getIssueProblems({
+      title: `[Feature Suggestion] Test Effect for ${creator}`,
+      body: 'body',
+      type: IssueType.FEATURE,
+    });
+
+    t.deepEqual(result, [], `Added CONTENT_CREATOR for "${creator}" but the type is FEATURE`);
+  }
+});
+
+test('if the type is BUG and the title contains a known content creator, does NOT add CONTENT_CREATOR', t => {
+  for (const creator of creators) {
+    const result = getIssueProblems({
+      title: `[Bug] Test Effect for ${creator}`,
+      body: 'body',
+      type: IssueType.BUG,
+    });
+
+    t.deepEqual(result, [], `Added CONTENT_CREATOR for "${creator}" but the type is BUG`);
+  }
 });
