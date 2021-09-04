@@ -1,13 +1,5 @@
 import {defaultTitles, overUsedEffects} from '../../constants/issues';
-import {IssueType} from './type';
-
-export const enum IssueProblem {
-  DEFAULT_TITLE = 'DEFAULT_TITLE',
-  MISSING_TAG = 'MISSING_TAG',
-  BAD_TAG = 'BAD_TAG',
-  OVERUSED_EFFECT = 'OVERUSED_EFFECT',
-  CONTENT_CREATOR = 'CONTENT_CREATOR',
-}
+import {IssueProblem, IssueType} from './types';
 
 interface GetIssueProblemsArgs {
   title: string;
@@ -61,5 +53,5 @@ export const getIssueProblems = ({title, body, type}: GetIssueProblemsArgs): Iss
     statuses.push(IssueProblem.BAD_TAG);
   }
 
-  return Array.from(new Set<IssueProblem>(statuses));
+  return Array.from(new Set<IssueProblem>(statuses))!;
 };

@@ -1,17 +1,17 @@
-import {getIssueProblems, IssueProblem} from './problems';
+import {getIssueProblems} from './problems';
+import {getIssueType} from './type';
+import {Issue, IssueDetails, IssueStatus} from './types';
 
-export const enum IssueStatus {
-  GOOD = 'GOOD',
-  BAD = 'BAD',
-}
-
-export interface IssueDetails {
-  problems: IssueProblem[];
-  status: IssueStatus;
-}
-
-export const getIssueDetails = (title: string, body: string): IssueDetails => {
-  const problems = getIssueProblems(title, body);
+export const getIssueDetails = (issue: Issue): IssueDetails => {
+  const {
+    issue: {
+      title,
+      body,
+      labels,
+    },
+  } = issue;
+  const type = getIssueType(labels);
+  const problems = getIssueProblems({title, body, type});
 
   let status: IssueStatus = IssueStatus.GOOD;
   if (problems.length > 0) {
@@ -19,6 +19,7 @@ export const getIssueDetails = (title: string, body: string): IssueDetails => {
   }
 
   return {
+    type,
     problems,
     status,
   };

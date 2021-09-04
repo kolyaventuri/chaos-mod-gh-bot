@@ -1,8 +1,8 @@
 import test from 'ava';
-import {overUsedEffects} from '../../src/constants/issues';
+import {overUsedEffects} from '../../../src/constants/issues';
 
-import {getIssueProblems, IssueProblem} from '../../src/utils/issue/problems';
-import {IssueType} from '../../src/utils/issue/type';
+import {getIssueProblems} from '../../../src/utils/issue/problems';
+import {IssueProblem, IssueType} from '../../../src/utils/issue/types';
 
 test('with a good title, body, and type, returns empty array', t => {
   const result = getIssueProblems({
