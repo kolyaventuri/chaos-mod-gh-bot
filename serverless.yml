@@ -16,6 +16,7 @@ provider:
     ENV: ${self:provider.stage}
     REGION: ${self:provider.region}
     SERVICE_NAME: ${self:service}-${self:provider.stage}
+    GH_ACCESS_TOKEN: ${env:GH_ACCESS_TOKEN}
 
 custom:
   logs:
@@ -52,7 +53,7 @@ functions:
           path: v1/healthcheck
           method: get
   hookHandler:
-    handler: src/v1/hook.post.handler
+    handler: src/v1/hook/post.handler
     description: Handler of github webhooks
     events:
       - http:
