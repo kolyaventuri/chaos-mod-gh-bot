@@ -17,7 +17,7 @@ export const handleHook = async (event: AWSLambda.APIGatewayEvent): Promise<AWSL
     };
   }
 
-  if (parseResult.action && parseResult.issue) {
+  if (parseResult.action === 'opened' && parseResult.issue) {
     try {
       await issueHandler(parseResult);
     } catch (error: unknown) {

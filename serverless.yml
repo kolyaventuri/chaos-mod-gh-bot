@@ -16,6 +16,7 @@ provider:
     ENV: ${self:provider.stage}
     REGION: ${self:provider.region}
     SERVICE_NAME: ${self:service}-${self:provider.stage}
+    GH_ACCESS_TOKEN: ${env:GH_ACCESS_TOKEN}
 
 custom:
   logs:
