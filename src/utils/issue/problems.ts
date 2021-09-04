@@ -21,7 +21,7 @@ export const getIssueProblems = ({title, body, type}: GetIssueProblemsArgs): Iss
   }
 
   // Check for empty titles
-  if (/^\[.+\]$/.test(title)) {
+  if (/^\[.+]$/.test(title)) {
     statuses.push(IssueProblem.EMPTY_TITLE);
   }
 

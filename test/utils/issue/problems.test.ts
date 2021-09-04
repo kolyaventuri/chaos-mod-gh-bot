@@ -157,7 +157,7 @@ test('if the title has a tag, but the rest of the title is empty, adds EMPTY_TIT
   const result = getIssueProblems({
     title: '[Effect Suggestion]',
     body: 'some valid body',
-    type: IssueType.EFFECT
+    type: IssueType.EFFECT,
   });
 
   t.deepEqual(result, [IssueProblem.EMPTY_TITLE]);
