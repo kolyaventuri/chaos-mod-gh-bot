@@ -32,9 +32,24 @@
       "site_admin": false
     },
     "labels": [
-      [
-        null
-      ]
+      {
+        "id": 123456789,
+        "node_id": "***",
+        "url": "https://api.github.com/repos/kolyaventuri/test-repo/labels/Effect%20Suggestion",
+        "name": "Effect Suggestion",
+        "color": "c5def5",
+        "default": false,
+        "description": ""
+      },
+      {
+        "id": 123456789,
+        "node_id": "***",
+        "url": "https://api.github.com/repos/kolyaventuri/test-repo/labels/Other%20Label",
+        "name": "Other Label",
+        "color": "c5def5",
+        "default": false,
+        "description": ""
+      }
     ],
     "state": "open",
     "locked": false,
