@@ -1,12 +1,13 @@
 import runWarm from '../../utils/run-warm';
 import issueHandler from '../../handlers/v1/issue';
+import {Issue} from '../../utils/issue/types';
 
 export const handleHook = async (event: AWSLambda.APIGatewayEvent): Promise<AWSLambda.APIGatewayProxyResult> => {
   const {body} = event;
-  let parseResult: Record<string, unknown>;
+  let parseResult: Issue;
 
   try {
-    parseResult = JSON.parse(body ?? '') as Record<string, unknown>;
+    parseResult = JSON.parse(body ?? '') as Issue;
   } catch (error: unknown) {
     console.error(error);
 

@@ -40,9 +40,18 @@ export interface Issue {
   action: string;
   issue: {
     [key: string]: any;
+    number: number;
     title: string;
     body: string;
     labels: Label[];
+  };
+  repository: {
+    [key: string]: unknown;
+    name: string;
+    owner: {
+      [key: string]: unknown;
+      login: string;
+    };
   };
 }
 
