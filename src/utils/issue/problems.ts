@@ -1,4 +1,4 @@
-import {creators, defaultTitles, overUsedEffects} from '../../constants/issues';
+import {creatorsRegex, defaultTitles, effectsRegex} from '../../constants/issues';
 import {IssueProblem, IssueType} from './types';
 
 interface GetIssueProblemsArgs {
@@ -13,6 +13,7 @@ export const getIssueProblems = ({title, body, type}: GetIssueProblemsArgs): Iss
   title = title.toLowerCase().replace(/\s+/g, ' ').trim();
   body = body.toLowerCase().replace(/\s+/g, ' ');
 
+  const combined = `${title}${body}`.replace(/\s+/g, '');
   const statuses: IssueProblem[] = [];
 
   // Check for default titles
@@ -26,11 +27,11 @@ export const getIssueProblems = ({title, body, type}: GetIssueProblemsArgs): Iss
   }
 
   // Check for overused effects
-  for (const effect of overUsedEffects) {
-    if (body.includes(effect)) {
-      statuses.push(IssueProblem.OVERUSED_EFFECT);
-    }
+  if (effectsRegex.test(combined)) {
+    statuses.push(IssueProblem.OVERUSED_EFFECT);
   }
+
+  effectsRegex.lastIndex = 0;
 
   // Check the type against the tag
   const match = tagRegex.exec(title) ?? [];
@@ -60,12 +61,11 @@ export const getIssueProblems = ({title, body, type}: GetIssueProblemsArgs): Iss
 
   // Check for known content creators
   if (type === IssueType.EFFECT) {
-    for (const creator of creators) {
-      if (body.includes(creator) || title.includes(creator)) {
-        statuses.push(IssueProblem.CONTENT_CREATOR);
-        break; // Only need to check for the first instance
-      }
+    if (creatorsRegex.test(combined)) {
+      statuses.push(IssueProblem.CONTENT_CREATOR);
     }
+
+    creatorsRegex.lastIndex = 0;
   }
 
   return Array.from(new Set<IssueProblem>(statuses))!;
