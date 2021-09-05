@@ -1,4 +1,4 @@
-import {creators, defaultTitles, overUsedEffects} from '../../constants/issues';
+import {creatorsRegex, defaultTitles, overUsedEffects} from '../../constants/issues';
 import {IssueProblem, IssueType} from './types';
 
 interface GetIssueProblemsArgs {
@@ -60,12 +60,12 @@ export const getIssueProblems = ({title, body, type}: GetIssueProblemsArgs): Iss
 
   // Check for known content creators
   if (type === IssueType.EFFECT) {
-    for (const creator of creators) {
-      if (body.includes(creator) || title.includes(creator)) {
-        statuses.push(IssueProblem.CONTENT_CREATOR);
-        break; // Only need to check for the first instance
-      }
+    const combined = `${title}${body}`.replace(/\s+/g, '');
+    if (creatorsRegex.test(combined)) {
+      statuses.push(IssueProblem.CONTENT_CREATOR);
     }
+
+    creatorsRegex.lastIndex = 0;
   }
 
   return Array.from(new Set<IssueProblem>(statuses))!;

@@ -9,15 +9,11 @@ export const overUsedEffects = [
   'cougars',
 ];
 
-export const creators = [
-  'darkviperau',
-  'dark viper au',
-  'dark viperau',
-  'darkviper au',
-  'matt',
-  'matto',
-  'callemkevin',
-  'callme kevin',
-  'call mekevin',
-  'call me kevin',
-];
+const creatorsRegexString = [
+  'darkviper(au)?',
+  'matto?',
+  'call(me)?kevin',
+  'kevin',
+].join('|');
+
+export const creatorsRegex = new RegExp(creatorsRegexString, 'gim');
