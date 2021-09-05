@@ -4,10 +4,7 @@ export const defaultTitles = [
   '[Bug] My Nasty Bug',
 ].map(s => s.toLowerCase());
 
-export const overUsedEffects = [
-  'cougar',
-  'cougars',
-];
+export const effectsRegex = /cougars?/gim;
 
 const creatorsRegexString = [
   'darkviper(au)?',

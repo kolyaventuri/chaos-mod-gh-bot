@@ -1,5 +1,4 @@
 import test from 'ava';
-import {overUsedEffects} from '../../../src/constants/issues';
 
 import {getIssueProblems} from '../../../src/utils/issue/problems';
 import {IssueProblem, IssueType} from '../../../src/utils/issue/types';
@@ -16,6 +15,8 @@ const creators = [
   'call mekevin',
   'call me kevin',
 ];
+
+const overUsedEffects = ['cougar', 'cougars'];
 
 test('with a good title, body, and type, returns empty array', t => {
   const result = getIssueProblems({
