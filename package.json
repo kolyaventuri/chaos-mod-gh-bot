@@ -14,7 +14,8 @@
     "test:unit": "ava",
     "lint:tsc": "tsc --noEmit",
     "lint:lint": "xo --fix",
-    "build": "sls webpack"
+    "build": "sls webpack",
+    "generate-policy": "node ./scripts/generate-iam-policy"
   },
   "repository": {
     "type": "git",

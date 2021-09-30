@@ -23,7 +23,8 @@ ex:
 
 # Deploying
 1) Set your **profile**, **role**, **aws id**, and **github token** in a `.env` file
-2) Run `npm run deploy` to deploy to a dev stage, or `npm run deploy:production` to deploy to production.
+2) Generate a valid IAM policy with `npm run generate-policy -- --stage={{STAGE}}` where `{{STAGE}}` is your deployment stage, typically `production` or `dev` (default `dev`)
+3) Run `npm run deploy` to deploy to a dev stage, or `npm run deploy:production` to deploy to production.
 
 # Q + A
 ### Why AVA? Why not Jest?
