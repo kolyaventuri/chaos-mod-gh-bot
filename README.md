@@ -22,8 +22,9 @@ ex:
 2) Run the local build with `npm run serve`! (alternatively `serve:watch` will run with nodemon)
 
 # Deploying
-1) Set your **profile**, **role**, **aws id**, and **github token** in a `.env` file
+1) Set your **profile**, **role**, **aws id**, and **github token** in a `.env` file (note: `role` is minus the environment. See step 3)
 2) Generate a valid IAM policy with `npm run generate-policy -- --stage={{STAGE}}` where `{{STAGE}}` is your deployment stage, typically `production` or `dev` (default `dev`)
+3) Attach your policy to your chosen role, with suffix. For example, if you set your role to `chaos-mod` in the `.env`, your IAM role should be `chaos-mod-production` for production.
 3) Run `npm run deploy` to deploy to a dev stage, or `npm run deploy:production` to deploy to production.
 
 # Q + A
