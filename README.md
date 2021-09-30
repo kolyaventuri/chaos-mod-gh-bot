@@ -21,11 +21,16 @@ ex:
 1) `npm i` to get the dependencies installed
 2) Run the local build with `npm run serve`! (alternatively `serve:watch` will run with nodemon)
 
+# IAM Setup
+You will need a properly configured IAM user, role, and policy in order to deploy.
+1) Generate a valid IAM policy with `npm run generate-policy -- --stage={{STAGE}}` where `{{STAGE}}` is your deployment stage, typically `production` or `dev` (default `dev`). Configure this as a new IAM policy.
+2) Create a role for your deployment stage, that matches your `AWS_ROLE` entry in the `.env`, plus prefix. For example, if you set `AWS_ROLE=chaos-bot`, for production, create a `chaos-bot-production` role
+3) Repeat step 2 for your `AWS_PROFILE`, creating an IAM user with your chosen profile, plus suffix. I.e., `AWS_PROFILE=chaos`.would be `chaos-production` for production deployments. **Remember to save your access key and secret** to your `~/.aws/credentials` file.
+4) Attach your IAM policy from step 1 to your role and your profile if not already done.
+
 # Deploying
-1) Set your **profile**, **role**, **aws id**, and **github token** in a `.env` file (note: `role` is minus the environment. See step 3)
-2) Generate a valid IAM policy with `npm run generate-policy -- --stage={{STAGE}}` where `{{STAGE}}` is your deployment stage, typically `production` or `dev` (default `dev`)
-3) Attach your policy to your chosen role, with suffix. For example, if you set your role to `chaos-mod` in the `.env`, your IAM role should be `chaos-mod-production` for production.
-3) Run `npm run deploy` to deploy to a dev stage, or `npm run deploy:production` to deploy to production.
+1) Set your **profile**, **role**, **aws id**, and **github token** in a `.env` file (note: `role` is minus the environment. See step 2 of IAM setup)
+2) Run `npm run deploy` to deploy to a dev stage, or `npm run deploy:production` to deploy to production.
 
 # Q + A
 ### Why AVA? Why not Jest?
